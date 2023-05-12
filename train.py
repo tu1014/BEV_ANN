@@ -5,12 +5,13 @@ import numpy as np
 import pandas as pd
 
 # read csv
-x_train = pd.read_csv('drive_cycle_data/X_TRAIN.csv')
-y_train = pd.read_csv('drive_cycle_data/Y_TRAIN.csv')
+x_train = pd.read_csv('drive_cycle_data/X_TRAIN_NORMALIZATION.csv')
+y_train = pd.read_csv('drive_cycle_data/Y_TRAIN_NORMALIZATION.csv')
 
 # build model
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Dense(64, input_dim=3, activation='relu'),
+    tf.keras.layers.Dense(64, input_dim=4, activation='relu'),
+    tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(1)
 ])
@@ -28,7 +29,7 @@ model.summary()
 
 # training
 history = model.fit(np.array(x_train), np.array(y_train), epochs=300)
-model.save('models/ANNv3.h5')
+model.save('models/ANNv4-Normalization.h5')
 
 # show result
 plt.figure(1)
